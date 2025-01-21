@@ -1,3 +1,5 @@
+> Last Updated: 2024-03-19
+
 ### Before the first meeting with TA
 - It would be best to meet and get to know each other in advance.
 - Create online groups through Discord / Teams / any tool you prefer to use.
