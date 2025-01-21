@@ -192,63 +192,167 @@
         .footer a:hover {
             text-decoration: underline;
         }
+
+        .password-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #f5f5f5;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .password-box {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .password-box h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .password-box input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .password-box button {
+            background: #0070f3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        .password-box button:hover {
+            background: #0051b3;
+        }
+
+        .hidden {
+            display: none;
+        }
     </style>
+    <script>
+        
+        const hashedPassword = '-4fee48c5'; 
+
+        function hashPassword(password) {
+        
+            let hash = 0;
+            for (let i = 0; i < password.length; i++) {
+                const char = password.charCodeAt(i);
+                hash = ((hash << 5) - hash) + char;
+                hash = hash & hash;
+            }
+            return hash.toString(16);
+        }
+
+        function checkPassword() {
+            const password = document.getElementById('password').value;
+            const hashedInput = hashPassword(password);
+            // console.log(hashedInput);
+            if (hashedInput === hashedPassword) {
+                document.getElementById('password-container').classList.add('hidden');
+                document.getElementById('main-content').classList.remove('hidden');
+                sessionStorage.setItem('passwordVerified', 'true');
+            } else {
+                alert('Incorrect password. Please try again.');
+            }
+        }
+        window.onload = function() {
+            if (sessionStorage.getItem('passwordVerified') === 'true') {
+                document.getElementById('password-container').classList.add('hidden');
+                document.getElementById('main-content').classList.remove('hidden');
+            } else {
+                document.getElementById('password-container').classList.remove('hidden');
+                document.getElementById('main-content').classList.add('hidden');
+            }
+        }
+    </script>
 </head>
 <body>
-    <div class="container">
-        <h1>Book a TP Meeting with Linli Shi</h1>
-        
-        <div class="calendar-section">
-            <h2>Instructions</h2>
-            <div class="instructions">
-                <h3>How to Book a Meeting?</h3>
-                <ul>
-                    <li>📅 Select a suitable 20-minute time slot in the booking interface below</li>
-                    <li>⚡ Please make your booking at least 24 hours in advance</li>
-                    <li>⏰ Available Times:
-                        <ul>
-                            <li>Wednesday 12:00 - 13:30</li>
-                            <li>Friday 13:00 - 15:30</li>
-                        </ul>
-                    </li>
-                    <li>📆 The booking system only shows slots for the next <b>7 days</b>. You need to book weekly for future meetings</li>
-                    <li>🔍 To check if a time slot is already booked, please refer to the calendar below</li>
-                </ul>
-            </div>
-            <div class="warning-box">
-                <h4>⚠️ Important Notice</h4>
-                <ul>
-                    <li>Each team is limited to ONE time slot per week. Multiple bookings are not allowed</li>
-                    <li>Please coordinate with your team members before making a booking</li>
-                    <li>You must include your <b>Team Number</b> when filling out the booking form</li>
-                    <li>All meetings will be held on Zoom by default:
-                        <ul style="margin: 10px 0;">
-                            <li>Meeting ID: 979 021 3089</li>
-                            <li>Passcode: teamproj</li>
-                        </ul>
-                    </li>
-                    <li>For in-person meetings, please email me at least one week in advance</li>
-                    <li>For cancellations or if you cannot find a suitable time slot, please email: <span class="email">lxs432[At]student[Dot]bham[Dot]ac[Dot]uk</span></li>
-                </ul>
-            </div>
+    <div id="password-container" class="password-container">
+        <div class="password-box">
+            <h2>Password Required</h2>
+            <input type="password" id="password" placeholder="Enter password" onkeypress="if(event.key === 'Enter') checkPassword()">
+            <button onclick="checkPassword()">Submit</button>
         </div>
+    </div>
 
-        <div class="calendar-section">
-            <h2>Book a Meeting</h2>
-            <div class="calendar-container">
-                <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1uQ4m7CLRzwTumZc6crtwZPu2_lUBAqOKupH54tAsQW4tYod1ansfl3gsJSudDU8sLPeGSKF2E?gv=true"></iframe>
+    <div id="main-content" class="hidden">
+        <div class="container">
+            <h1>Book a TP Meeting with Linli Shi</h1>
+            
+            <div class="calendar-section">
+                <h2>Instructions</h2>
+                <div class="instructions">
+                    <h3>How to Book a Meeting?</h3>
+                    <ul>
+                        <li>📅 Select a suitable 20-minute time slot in the booking interface below</li>
+                        <li>⚡ Please make your booking at least 24 hours in advance</li>
+                        <li>⏰ Available Times:
+                            <ul>
+                                <li>Wednesday 12:00 - 13:30</li>
+                                <li>Friday 13:00 - 15:30</li>
+                            </ul>
+                        </li>
+                        <li>📆 The booking system only shows slots for the next <b>7 days</b>. You need to book weekly for future meetings</li>
+                        <li>🔍 To check if a time slot is already booked, please refer to the calendar below</li>
+                    </ul>
+                </div>
+                <div class="warning-box">
+                    <h4>⚠️ Important Notice</h4>
+                    <ul>
+                        <li>Each team is limited to ONE time slot per week. Multiple bookings are not allowed</li>
+                        <li>Please coordinate with your team members before making a booking</li>
+                        <li>You must include your <b>Team Number</b> when filling out the booking form</li>
+                        <li>All meetings will be held on Zoom by default:
+                            <ul style="margin: 10px 0;">
+                                <li>Meeting ID: 979 021 3089</li>
+                                <li>Passcode: teamproj</li>
+                            </ul>
+                        </li>
+                        <li>For in-person meetings, please email me at least one week in advance</li>
+                        <li>For cancellations or if you cannot find a suitable time slot, please email: <span class="email">lxs432[At]student[Dot]bham[Dot]ac[Dot]uk</span></li>
+                    </ul>
+                </div>
             </div>
-        </div>
 
-        <div class="calendar-section">
-            <h2>Linli's Calendar</h2>
-            <div class="calendar-container">
-                <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=Europe%2FLondon&src=Y25zaGlsaW5saUBnbWFpbC5jb20&src=ZjA3NjRiMjk4Y2M4MmIxNDRkYTgzN2E5Y2ZhYWI0ZTc4MGYxZDVlMTZmYjVjNGMwNTM5ZDA5NWEzNjBhYmEwZUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23039BE5&color=%23E4C441&mode=WEEK&showprint=0&showTabs=0&showCalendars=1&showTz=0&showNav=1&dates.size=medium&showTitle=0&showDate=1&showPrint=0&timeMin=09:00:00" style="border-radius: 10px; border: 1px solid #777" scrolling="no"></iframe>
+            <div class="calendar-section">
+                <h2>Book a Meeting</h2>
+                <div class="calendar-container">
+                    <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1uQ4m7CLRzwTumZc6crtwZPu2_lUBAqOKupH54tAsQW4tYod1ansfl3gsJSudDU8sLPeGSKF2E?gv=true"></iframe>
+                </div>
             </div>
-        </div>
 
-        <div class="footer">
-            <p>Created by <a href="https://github.com/indexss" target="_blank">Linli Shi</a> • Built with <a href="https://calendar.google.com" target="_blank">Google Calendar</a> • Deployed on <a href="https://vercel.com" target="_blank">Vercel</a></p>
+            <div class="calendar-section">
+                <h2>Linli's Calendar</h2>
+                <div class="calendar-container">
+                    <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=Europe%2FLondon&src=Y25zaGlsaW5saUBnbWFpbC5jb20&src=ZjA3NjRiMjk4Y2M4MmIxNDRkYTgzN2E5Y2ZhYWI0ZTc4MGYxZDVlMTZmYjVjNGMwNTM5ZDA5NWEzNjBhYmEwZUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23039BE5&color=%23E4C441&mode=WEEK&showprint=0&showTabs=0&showCalendars=1&showTz=0&showNav=1&dates.size=medium&showTitle=0&showDate=1&showPrint=0&timeMin=09:00:00" style="border-radius: 10px; border: 1px solid #777" scrolling="no"></iframe>
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>Created by <a href="https://github.com/indexss" target="_blank">Linli Shi</a> • Built with <a href="https://calendar.google.com" target="_blank">Google Calendar</a> • Deployed on <a href="https://vercel.com" target="_blank">Vercel</a></p>
+            </div>
         </div>
     </div>
 </body>
