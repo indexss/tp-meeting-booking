@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book a TP Meeting with Linli Shi</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📅</text></svg>">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+
+        .calendar-section {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .calendar-container {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 75%;
+            overflow: hidden;
+        }
+
+        .calendar-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        h2 {
+            color: #444;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .instructions {
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .instructions h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+
+        .instructions ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .instructions ul li {
+            margin-bottom: 12px;
+            line-height: 1.6;
+            color: #444;
+        }
+
+        .instructions ul ul {
+            padding-left: 20px;
+            margin-top: 8px;
+        }
+
+        .instructions ul ul li {
+            margin-bottom: 6px;
+            list-style-type: disc;
+        }
+
+        .email {
+            font-family: monospace;
+            background: #eee;
+            padding: 2px 6px;
+            border-radius: 4px;
+            word-wrap: break-word;
+            display: inline-block;
+            max-width: 100%;
+        }
+
+        .warning-box {
+            background-color: #fff3cd;
+            border: 1px solid #ffeeba;
+            border-left: 5px solid #ffc107;
+            border-radius: 4px;
+            padding: 15px;
+            margin: 15px 0;
+            color: #856404;
+        }
+
+        .warning-box h4 {
+            margin: 0 0 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #856404;
+            font-size: 1.1em;
+        }
+
+        .warning-box ul {
+            margin: 0;
+            padding-left: 25px;
+            list-style-type: disc;
+        }
+
+        .warning-box li {
+            margin-bottom: 8px;
+            color: #856404;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        @media (max-width: 768px) {
+            .calendar-container {
+                padding-bottom: 100%;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            h2 {
+                font-size: 1.5em;
+            }
+
+            .instructions {
+                padding: 15px;
+            }
+
+            .instructions h3 {
+                font-size: 1.2em;
+            }
+
+            .email {
+                font-size: 0.9em;
+                padding: 2px 4px;
+            }
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 30px;
+        }
+
+        .footer a {
+            color: #0070f3;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Book a TP Meeting with Linli Shi</h1>
+        
+        <div class="calendar-section">
+            <h2>Instructions</h2>
+            <div class="instructions">
+                <h3>How to Book a Meeting?</h3>
+                <ul>
+                    <li>📅 Select a suitable 20-minute time slot in the booking interface below</li>
+                    <li>⏰ Available Times:
+                        <ul>
+                            <li>Wednesday 12:00 - 13:30</li>
+                            <li>Friday 13:00 - 15:30</li>
+                        </ul>
+                    </li>
+                    <li>📆 The booking system only shows slots for the next 7 days. You need to book weekly for future meetings</li>
+                    <li>🔍 To check if a time slot is already booked, please refer to the calendar below</li>
+                </ul>
+            </div>
+            <div class="warning-box">
+                <h4>⚠️ Important Notice</h4>
+                <ul>
+                    <li>Each team is limited to ONE time slot per week. Do not make multiple bookings!</li>
+                    <li>Please coordinate with your team members before making a booking</li>
+                    <li>You must fill in the correct Team Number in the booking form</li>
+                    <li>If you need to cancel a booking or your team cannot find a suitable time slot, please email: <span class="email">lxs432[At]student[Dot]bham[Dot]ac[Dot]uk</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="calendar-section">
+            <h2>Book a Meeting</h2>
+            <div class="calendar-container">
+                <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1uQ4m7CLRzwTumZc6crtwZPu2_lUBAqOKupH54tAsQW4tYod1ansfl3gsJSudDU8sLPeGSKF2E?gv=true"></iframe>
+            </div>
+        </div>
+
+        <div class="calendar-section">
+            <h2>Linli's Calendar</h2>
+            <div class="calendar-container">
+                <iframe src="https://calendar.google.com/calendar/embed?src=cnshilinli%40gmail.com&ctz=Europe%2FLondon" scrolling="no"></iframe>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Created by <a href="https://github.com/indexss" target="_blank">Linli Shi</a> • Built with <a href="https://calendar.google.com" target="_blank">Google Calendar</a> • Deployed on <a href="https://vercel.com" target="_blank">Vercel</a></p>
+        </div>
+    </div>
+</body>
+</html> 
