@@ -6,6 +6,7 @@
     <title>Book a TP Meeting with Linli Shi</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📅</text></svg>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -677,6 +678,68 @@
         .zoom-button {
             margin-top: 10px;
         }
+
+        /* Markdown内容的样式 */
+        .markdown-content {
+            line-height: 1.6;
+            color: #444;
+        }
+
+        /* 重置所有标题的默认样式 */
+        .markdown-content h1,
+        .markdown-content h2,
+        .markdown-content h3,
+        .markdown-content h4,
+        .markdown-content h5,
+        .markdown-content h6 {
+            text-align: left;  /* 默认左对齐 */
+            color: #2c3e50;
+            margin: 1em 0 0.5em;
+            background: none;  /* 移除可能的背景渐变 */
+            -webkit-background-clip: unset;
+            background-clip: unset;
+            text-shadow: none;
+        }
+
+        /* 单独设置h1的样式 */
+        .markdown-content h1 {
+            font-size: 2em;
+            text-align: center;  /* 只有h1居中 */
+        }
+
+        /* 其他标题的大小 */
+        .markdown-content h2 { font-size: 1.5em; }
+        .markdown-content h3 { font-size: 1.3em; }
+        .markdown-content h4 { font-size: 1.2em; }
+        .markdown-content h5 { font-size: 1.1em; }
+        .markdown-content h6 { font-size: 1em; }
+
+        .markdown-content p {
+            margin: 0.8em 0;
+        }
+
+        .markdown-content ul,
+        .markdown-content ol {
+            padding-left: 1.5em;
+            margin: 0.5em 0;
+        }
+
+        .markdown-content li {
+            margin: 0.3em 0;
+        }
+
+        .markdown-content code {
+            background: rgba(0,112,243,0.1);
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+
+        .markdown-content pre code {
+            display: block;
+            padding: 1em;
+            overflow-x: auto;
+        }
     </style>
     <script>
         
@@ -729,6 +792,16 @@
         <div class="container">
             <h1 class="main-title"><i class="fas fa-calendar-check"></i>Book a TP Meeting with Linli Shi</h1>
             
+            <div class="calendar-section">
+                <div class="section-title">
+                    <i class="fas fa-bullhorn"></i>
+                    <h2>Bulletin</h2>
+                </div>
+                <div class="markdown-content" id="information-content">
+                    <!-- Markdown内容将被JavaScript加载到这里 -->
+                </div>
+            </div>
+
             <div class="calendar-section">
                 <div class="section-title">
                     <i class="fas fa-info-circle"></i>
@@ -807,6 +880,17 @@
     </div>
 
     <script>
+        // 从informations.md文件加载内容
+        fetch('informations.md')
+            .then(response => response.text())
+            .then(markdown => {
+                document.getElementById('information-content').innerHTML = marked.parse(markdown);
+            })
+            .catch(error => {
+                console.error('Error loading markdown:', error);
+                document.getElementById('information-content').innerHTML = '<p>Failed to load bulletin content.</p>';
+            });
+
         // 根据屏幕宽度切换日历视图
         function switchCalendarView() {
             const desktopCalendar = document.querySelector('.desktop-calendar');
