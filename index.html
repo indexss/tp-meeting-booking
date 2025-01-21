@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book a TP Meeting with Linli Shi</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📅</text></svg>">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -13,29 +14,46 @@
         }
 
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f5f5f5;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
+            min-height: 100vh;
             padding: 20px;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         h1 {
             text-align: center;
-            color: #333;
+            color: #2c3e50;
             margin-bottom: 30px;
             font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
 
         .calendar-section {
-            background: white;
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 30px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 35px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1),
+                        0 1px 8px rgba(0,0,0,0.02);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .calendar-section:hover {
+            transform: translateY(-5px) scale(1.01);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.12),
+                        0 1px 10px rgba(0,0,0,0.03);
         }
 
         .calendar-container {
@@ -63,16 +81,20 @@
         }
 
         .instructions {
-            padding: 20px;
-            background: #f8f9fa;
-            border-radius: 8px;
+            padding: 25px;
+            background: linear-gradient(to right, #f8f9fa, #ffffff);
+            border-radius: 12px;
             margin-bottom: 20px;
+            border: 1px solid rgba(0,0,0,0.05);
         }
 
         .instructions h3 {
             color: #2c3e50;
             margin-bottom: 15px;
             font-size: 1.4em;
+            border-bottom: 2px solid #0070f3;
+            padding-bottom: 8px;
+            display: inline-block;
         }
 
         .instructions ul {
@@ -81,39 +103,71 @@
         }
 
         .instructions ul li {
-            margin-bottom: 12px;
-            line-height: 1.6;
+            margin-bottom: 15px;
+            line-height: 1.8;
             color: #444;
+            position: relative;
+            padding-left: 35px;
+        }
+
+        .instructions ul li i {
+            position: absolute;
+            left: 0;
+            top: 3px;
+            color: #0070f3;
+            font-size: 1.2em;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 112, 243, 0.1);
+            border-radius: 50%;
+        }
+
+        .instructions ul li {
+            display: block;
         }
 
         .instructions ul ul {
-            padding-left: 20px;
             margin-top: 8px;
+            padding-left: 35px;
         }
 
         .instructions ul ul li {
-            margin-bottom: 6px;
+            padding-left: 0;
+            margin-bottom: 8px;
             list-style-type: disc;
         }
 
         .email {
-            font-family: monospace;
-            background: #eee;
+            color: #444;
+            text-decoration: none;
             padding: 2px 6px;
             border-radius: 4px;
-            word-wrap: break-word;
-            display: inline-block;
-            max-width: 100%;
+            background: linear-gradient(135deg, rgba(0,112,243,0.1), rgba(0,112,243,0.05));
+            border: 1px solid rgba(0,112,243,0.1);
+            transition: all 0.3s ease;
+            font-size: 0.95em;
+        }
+
+        .email:hover {
+            background: linear-gradient(135deg, rgba(0,112,243,0.15), rgba(0,112,243,0.1));
+            border-color: rgba(0,112,243,0.2);
+            color: #0070f3;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 4px rgba(0,112,243,0.1);
         }
 
         .warning-box {
-            background-color: #fff3cd;
-            border: 1px solid #ffeeba;
+            background: linear-gradient(135deg, rgba(255, 243, 205, 0.9), rgba(255, 248, 230, 0.9));
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 238, 186, 0.5);
             border-left: 5px solid #ffc107;
-            border-radius: 4px;
-            padding: 15px;
+            border-radius: 8px;
+            padding: 20px;
             margin: 15px 0;
-            color: #856404;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
         }
 
         .warning-box h4 {
@@ -123,6 +177,12 @@
             gap: 8px;
             color: #856404;
             font-size: 1.1em;
+        }
+
+        .warning-box h4 i {
+            color: #ffc107;
+            margin-right: 10px;
+            font-size: 1.2em;
         }
 
         .warning-box ul {
@@ -138,6 +198,12 @@
             overflow-wrap: break-word;
         }
 
+        .warning-box ul li i {
+            color: #856404;
+            margin-right: 8px;
+            font-size: 0.9em;
+        }
+
         .warning-box ul ul {
             margin-top: 8px;
             margin-bottom: 8px;
@@ -151,7 +217,9 @@
 
         @media (max-width: 768px) {
             .calendar-container {
-                padding-bottom: 100%;
+                padding-bottom: 150%;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
             }
             
             h1 {
@@ -174,23 +242,51 @@
                 font-size: 0.9em;
                 padding: 2px 4px;
             }
+
+            .calendar-container iframe {
+                min-width: 600px;
+                width: 100%;
+                height: 100%;
+            }
+
+            .calendar-container::after {
+                content: '← Scroll horizontally →';
+                position: absolute;
+                bottom: 10px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: rgba(0, 0, 0, 0.7);
+                color: white;
+                padding: 8px 16px;
+                border-radius: 20px;
+                font-size: 12px;
+                pointer-events: none;
+                opacity: 0.8;
+            }
         }
 
         .footer {
             text-align: center;
-            padding: 20px;
+            padding: 30px;
             color: #666;
-            font-size: 0.9em;
-            margin-top: 30px;
+            font-size: 0.95em;
+            margin-top: 40px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
         }
 
         .footer a {
             color: #0070f3;
             text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 500;
         }
 
         .footer a:hover {
-            text-decoration: underline;
+            color: #0052cc;
+            text-decoration: none;
+            transform: translateY(-1px);
         }
 
         .password-container {
@@ -209,45 +305,377 @@
 
         .password-box {
             background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
             text-align: center;
             max-width: 400px;
             width: 90%;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .password-box h2 {
-            margin-bottom: 20px;
-            color: #333;
+            margin-bottom: 25px;
+            color: #2c3e50;
+            font-size: 1.8em;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
         }
 
         .password-box input {
             width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ddd;
-            border-radius: 5px;
+            padding: 12px 15px;
+            margin: 15px 0;
+            border: 2px solid rgba(238, 238, 238, 0.8);
+            border-radius: 8px;
             font-size: 16px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .password-box input:focus {
+            background: white;
+            border-color: #0070f3;
+            box-shadow: 0 0 0 4px rgba(0,112,243,0.15);
+            transform: translateY(-1px);
         }
 
         .password-box button {
-            background: #0070f3;
+            background: linear-gradient(135deg, #0070f3, #00a1ff);
             color: white;
             border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
+            padding: 14px 28px;
+            border-radius: 8px;
             cursor: pointer;
-            font-size: 16px;
-            margin-top: 10px;
+            font-size: 14px;
+            margin-top: 15px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            box-shadow: 0 4px 12px rgba(0,112,243,0.2);
         }
 
         .password-box button:hover {
-            background: #0051b3;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,112,243,0.3);
+            background: linear-gradient(135deg, #0051b3, #0070f3);
         }
 
         .hidden {
             display: none;
+        }
+
+        /* 添加毛玻璃效果 */
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        /* 改进卡片效果 */
+        .calendar-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 35px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1),
+                        0 1px 8px rgba(0,0,0,0.02);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .calendar-section:hover {
+            transform: translateY(-5px) scale(1.01);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.12),
+                        0 1px 10px rgba(0,0,0,0.03);
+        }
+
+        /* 改进标题样式 */
+        h1 {
+            background: linear-gradient(45deg, #2c3e50, #3498db);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: none;
+            margin: 40px 0;
+            font-size: 3em;
+            letter-spacing: -1px;
+        }
+
+        /* 改进警告框样式 */
+        .warning-box {
+            background: linear-gradient(135deg, rgba(255, 243, 205, 0.9), rgba(255, 248, 230, 0.9));
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 238, 186, 0.5);
+            border-left: 5px solid #ffc107;
+        }
+
+        /* 改进输入框样式 */
+        .password-box input {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(5px);
+            border: 2px solid rgba(238, 238, 238, 0.8);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .password-box input:focus {
+            background: white;
+            border-color: #0070f3;
+            box-shadow: 0 0 0 4px rgba(0,112,243,0.15);
+            transform: translateY(-1px);
+        }
+
+        /* 改进按钮样式 */
+        .password-box button {
+            background: linear-gradient(135deg, #0070f3, #00a1ff);
+            padding: 14px 28px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            font-size: 14px;
+            box-shadow: 0 4px 12px rgba(0,112,243,0.2);
+        }
+
+        .password-box button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,112,243,0.3);
+            background: linear-gradient(135deg, #0051b3, #0070f3);
+        }
+
+        /* 改进页脚样式 */
+        .footer {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 50px;
+            padding: 35px;
+        }
+
+        .footer a {
+            position: relative;
+            padding: 2px 4px;
+        }
+
+        .footer a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #0070f3, #00a1ff);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s ease;
+        }
+
+        .footer a:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        /* 添加滚动条美化 */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(0, 112, 243, 0.3);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(0, 112, 243, 0.5);
+        }
+
+        /* 添加选中文本样式 */
+        ::selection {
+            background: rgba(0, 112, 243, 0.2);
+            color: #0070f3;
+        }
+
+        /* 改进指引列表样式 */
+        .instructions ul li {
+            margin-bottom: 15px;
+            line-height: 1.8;
+            color: #444;
+            position: relative;
+            padding-left: 35px;
+        }
+
+        .instructions ul li i {
+            position: absolute;
+            left: 0;
+            top: 3px;
+            color: #0070f3;
+            font-size: 1.2em;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 112, 243, 0.1);
+            border-radius: 50%;
+        }
+
+        .instructions ul li:hover i {
+            transform: scale(1.1);
+            background: rgba(0, 112, 243, 0.2);
+        }
+
+        /* 改进警告框图标样式 */
+        .warning-box h4 i {
+            color: #ffc107;
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+
+        .warning-box ul li i {
+            color: #856404;
+            margin-right: 8px;
+            font-size: 0.9em;
+        }
+
+        /* 添加卡片标题样式 */
+        .section-title {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(0, 112, 243, 0.1);
+        }
+
+        .section-title i {
+            font-size: 1.5em;
+            color: #0070f3;
+            margin-right: 12px;
+            background: rgba(0, 112, 243, 0.1);
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .section-title h2 {
+            margin: 0;
+            color: #2c3e50;
+        }
+
+        /* 改进主标题样式 */
+        .main-title {
+            text-align: center;
+            color: #2c3e50;
+            margin: 40px 0;
+            font-size: 2.8em;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .main-title i {
+            color: #0070f3;
+            margin-right: 15px;
+            font-size: 0.9em;
+        }
+
+        .main-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 3px;
+            background: linear-gradient(90deg, 
+                rgba(0,112,243,0.2) 0%, 
+                #0070f3 50%, 
+                rgba(0,112,243,0.2) 100%
+            );
+            border-radius: 3px;
+        }
+
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2em;
+            }
+            .main-title::after {
+                width: 150px;
+            }
+        }
+
+        .zoom-button {
+            display: inline-flex;
+            align-items: center;
+            background: #2D8CFF;  /* Zoom的品牌蓝色 */
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(45, 140, 255, 0.2);
+        }
+
+        .zoom-button:hover {
+            background: #2681F2;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(45, 140, 255, 0.3);
+        }
+
+        .zoom-button img {
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+        }
+
+        .zoom-tooltip {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+            font-style: italic;
+        }
+
+        .zoom-info-box {
+            background: linear-gradient(135deg, rgba(45, 140, 255, 0.1), rgba(45, 140, 255, 0.05));
+            border: 1px solid rgba(45, 140, 255, 0.2);
+            border-left: 5px solid #2D8CFF;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            box-shadow: 0 4px 6px rgba(45, 140, 255, 0.05);
+        }
+
+        .zoom-info-box h4 {
+            color: #2D8CFF;
+            margin: 0 0 12px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1.1em;
+        }
+
+        .zoom-info-box ul {
+            margin: 0;
+            padding-left: 0;
+            list-style-type: none;
+        }
+
+        .zoom-info-box li {
+            margin-bottom: 6px;
+            color: #444;
+            padding-left: 10px;
+        }
+
+        .zoom-button {
+            margin-top: 10px;
         }
     </style>
     <script>
@@ -299,61 +727,103 @@
 
     <div id="main-content" class="hidden">
         <div class="container">
-            <h1>Book a TP Meeting with Linli Shi</h1>
+            <h1 class="main-title"><i class="fas fa-calendar-check"></i>Book a TP Meeting with Linli Shi</h1>
             
             <div class="calendar-section">
-                <h2>Instructions</h2>
+                <div class="section-title">
+                    <i class="fas fa-info-circle"></i>
+                    <h2>Instructions</h2>
+                </div>
                 <div class="instructions">
                     <h3>How to Book a Meeting?</h3>
                     <ul>
-                        <li>📅 Select a suitable 20-minute time slot in the booking interface below</li>
-                        <li>⚡ Please make your booking at least 24 hours in advance</li>
-                        <li>⏰ Available Times:
+                        <li><i class="fas fa-calendar-plus"></i> Select a suitable 20-minute time slot in the booking interface below</li>
+                        <li><i class="fas fa-bolt"></i> Please make your booking <span style="color: #0070f3; font-weight: bold;">at least 24 hours</span> in advance</li>
+                        <li><i class="fas fa-clock"></i> Available Times:
                             <ul>
-                                <li>Wednesday 12:00 - 13:30</li>
-                                <li>Friday 13:00 - 15:30</li>
+                                <li>Wednesday 11:00 - 13:00 in <b>UG04, CS Building</b></li>
+                                <li>Friday 13:00 - 16:00 in <b>Zoom</b></li>
                             </ul>
                         </li>
-                        <li>📆 The booking system only shows slots for the next <b>7 days</b>. You need to book weekly for future meetings</li>
-                        <li>🔍 To check if a time slot is already booked, please refer to the calendar below</li>
+                        <li><i class="fas fa-calendar-week"></i> You can book slots up to <b>7 days</b> in advance. You need to book weekly for future meetings</li>
+                        <li><i class="fas fa-search"></i> To check if a time slot is already booked, please refer to the calendar below</li>
                     </ul>
+
+                    <div class="zoom-info-box">
+                        <h4><i class="fas fa-video"></i> Zoom Meeting Information</h4>
+                        <ul>
+                            <li>Meeting ID: 979 021 3089</li>
+                            <li>Passcode: teamproj2025</li>
+                        </ul>
+                        <a href="https://zoom.us/j/9790213089?pwd=teamproj2025" target="_blank" class="zoom-button">
+                            <i class="fas fa-video" style="margin-right: 8px;"></i>
+                            Join Zoom Meeting
+                        </a>
+                        <div class="zoom-tooltip">💡 Tip: Make sure you have Zoom client installed on your device</div>
+                    </div>
                 </div>
                 <div class="warning-box">
                     <h4>⚠️ Important Notice</h4>
                     <ul>
-                        <li>Each team is limited to ONE time slot per week. Multiple bookings are not allowed</li>
+                        <li>Each team is limited to <span style="color: #dc3545; font-weight: bold;">ONE</span> time slot per week. Multiple bookings are not allowed</li>
                         <li>Please coordinate with your team members before making a booking</li>
                         <li>You must include your <b>Team Number</b> when filling out the booking form</li>
-                        <li>All meetings will be held on Zoom by default:
-                            <ul style="margin: 10px 0;">
-                                <li>Meeting ID: 979 021 3089</li>
-                                <li>Passcode: teamproj</li>
-                            </ul>
+                        <li>For cancellations or if you cannot find a suitable time slot, please email: 
+                            <a href="mailto:lxs432@student.bham.ac.uk?subject=Team%20[No.]%20Meeting%20[Cancellation%20/%20Inquiry]&body=Please%20replace%20the%20[content]%20in%20the%20subject%20with%20your%20information.%0D%0A%0D%0ATeam%20Number:%20%0D%0A%0D%0ARequest:%20" class="email">
+                                lxs432[At]student[Dot]bham[Dot]ac[Dot]uk
+                            </a>
                         </li>
-                        <li>For in-person meetings, please email me at least one week in advance</li>
-                        <li>For cancellations or if you cannot find a suitable time slot, please email: <span class="email">lxs432[At]student[Dot]bham[Dot]ac[Dot]uk</span></li>
                     </ul>
                 </div>
             </div>
 
             <div class="calendar-section">
-                <h2>Book a Meeting</h2>
+                <div class="section-title">
+                    <i class="fas fa-calendar-plus"></i>
+                    <h2>Book a Meeting</h2>
+                </div>
                 <div class="calendar-container">
-                    <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1uQ4m7CLRzwTumZc6crtwZPu2_lUBAqOKupH54tAsQW4tYod1ansfl3gsJSudDU8sLPeGSKF2E?gv=true"></iframe>
+                    <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1uQ4m7CLRzwTumZc6crtwZPu2_lUBAqOKupH54tAsQW4tYod1ansfl3gsJSudDU8sLPeGSKF2E?gv=true&mode=week" class="desktop-calendar"></iframe>
+                    <iframe src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1uQ4m7CLRzwTumZc6crtwZPu2_lUBAqOKupH54tAsQW4tYod1ansfl3gsJSudDU8sLPeGSKF2E?gv=true&mode=agenda" class="mobile-calendar" style="display: none;"></iframe>
                 </div>
             </div>
 
             <div class="calendar-section">
-                <h2>Linli's Calendar</h2>
+                <div class="section-title">
+                    <i class="fas fa-calendar-alt"></i>
+                    <h2>Linli's Calendar</h2>
+                </div>
                 <div class="calendar-container">
                     <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=Europe%2FLondon&src=Y25zaGlsaW5saUBnbWFpbC5jb20&src=ZjA3NjRiMjk4Y2M4MmIxNDRkYTgzN2E5Y2ZhYWI0ZTc4MGYxZDVlMTZmYjVjNGMwNTM5ZDA5NWEzNjBhYmEwZUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23039BE5&color=%23E4C441&mode=WEEK&showprint=0&showTabs=0&showCalendars=1&showTz=0&showNav=1&dates.size=medium&showTitle=0&showDate=1&showPrint=0&timeMin=09:00:00" style="border-radius: 10px; border: 1px solid #777" scrolling="no"></iframe>
                 </div>
             </div>
+
+            
 
             <div class="footer">
                 <p>Created by <a href="https://github.com/indexss" target="_blank">Linli Shi</a> • Built with <a href="https://calendar.google.com" target="_blank">Google Calendar</a> • Deployed on <a href="https://vercel.com" target="_blank">Vercel</a></p>
             </div>
         </div>
     </div>
+
+    <script>
+        // 根据屏幕宽度切换日历视图
+        function switchCalendarView() {
+            const desktopCalendar = document.querySelector('.desktop-calendar');
+            const mobileCalendar = document.querySelector('.mobile-calendar');
+            
+            if (window.innerWidth <= 768) {
+                desktopCalendar.style.display = 'none';
+                mobileCalendar.style.display = 'block';
+            } else {
+                desktopCalendar.style.display = 'block';
+                mobileCalendar.style.display = 'none';
+            }
+        }
+
+        // 页面加载和窗口大小改变时切换视图
+        window.addEventListener('load', switchCalendarView);
+        window.addEventListener('resize', switchCalendarView);
+    </script>
 </body>
 </html> 
