@@ -7,6 +7,8 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📅</text></svg>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" />
     <style>
         * {
             margin: 0;
@@ -729,20 +731,51 @@
         }
 
         .markdown-content code {
-            background: rgba(0,112,243,0.1);
+            background: #f8f9fa;
             padding: 0.2em 0.4em;
             border-radius: 3px;
-            font-family: monospace;
+            font-family: 'Fira Code', Consolas, Monaco, 'Andale Mono', monospace;
+            color: #383a42;
+            border: none;  /* 移除边框 */
+        }
+
+        .markdown-content pre {
+            background: #f8f9fa;  /* 更柔和的背景色 */
+            border-radius: 6px;
+            margin: 1em 0;
+            padding: 1em;
+            overflow: auto;
+            border: none;  /* 移除边框 */
         }
 
         .markdown-content pre code {
-            display: block;
-            padding: 1em;
-            overflow-x: auto;
+            background: transparent;
+            padding: 0;
+            font-family: 'Fira Code', Consolas, Monaco, 'Andale Mono', monospace;
+            font-size: 0.9em;
+            line-height: 1.5;
+            color: #383a42;
+            border: none;  /* 移除边框 */
+        }
+
+        /* Prism.js行号样式 */
+        .line-numbers .line-numbers-rows {
+            border-right: 1px solid #e0e3f1;
+            padding-right: 10px;
         }
     </style>
     <script>
-        
+        // 配置marked以支持Prism高亮
+        marked.setOptions({
+            highlight: function(code, lang) {
+                if (Prism.languages[lang]) {
+                    return Prism.highlight(code, Prism.languages[lang], lang);
+                }
+                return code;
+            },
+            langPrefix: 'language-'  // Prism的类名前缀
+        });
+
         const hashedPassword = '-4fee48c5'; 
 
         function hashPassword(password) {
@@ -778,6 +811,13 @@
             }
         }
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-java.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-markdown.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-json.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-bash.min.js"></script>
 </head>
 <body>
     <div id="password-container" class="password-container">
@@ -880,11 +920,13 @@
     </div>
 
     <script>
-        // 从informations.md文件加载内容
         fetch('informations.md')
             .then(response => response.text())
             .then(markdown => {
-                document.getElementById('information-content').innerHTML = marked.parse(markdown);
+                const content = marked.parse(markdown);
+                document.getElementById('information-content').innerHTML = content;
+                // 重新初始化所有代码块的高亮
+                Prism.highlightAll();
             })
             .catch(error => {
                 console.error('Error loading markdown:', error);

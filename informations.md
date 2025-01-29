@@ -59,5 +59,3 @@ service VendingMachine, Product with serviceClass
 paginate Product with pagination
 ```
 
-Please note that you do not need to describe the relationships between various entities in S1. 
-
