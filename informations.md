@@ -1,6 +1,10 @@
 > Last Updated: 01/29/2025
 
+<div style="color: red;">
+
 **If you have any questions and need to email me, you're welcome, but please include your group number in the email subject. This will help me quickly understand the context.**
+
+</div>
 
 ### Before the first meeting with TA
 - It would be best to meet and get to know each other in advance.
