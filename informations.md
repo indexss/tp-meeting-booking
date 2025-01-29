@@ -19,7 +19,7 @@ A: Note that the module requires you to hold at least two meetings per week—on
 For the meeting with the TA, you need to use this website each week to book my meeting time slot. Ideally, my time slots are fixed: I have some in-person meeting time slots on Wednesdays and some Zoom meeting time slots on Fridays. However, I cannot guarantee that these will remain unchanged, so I only open the booking window for the next seven days. 
 Additionally, if you are unable to coordinate your schedules within the given time slots, you can email me to arrange a new time.
 
-**Q: My team member never communicates with the rest of us, and we don't know him. What should we do?**
+**Q: My team member never communicates with the rest of us, and we don't know them. What should we do?**
 
 A: Seed an e-mail to me with the name of the team member.
 
